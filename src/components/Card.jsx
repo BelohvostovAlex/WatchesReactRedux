@@ -1,17 +1,17 @@
 import React from 'react'
 
-function Card ( {title, price, src} ) {
+function Card ( {title, price, src, onAdd, onFavourite} ) {
     const [check, setCheck] = React.useState(false)
     const [like, setLike] = React.useState(false)
 
     const handleCheck = () => {
         setCheck(!check)
-        
+        onAdd( {title, src, price} )
     }
 
     const handleLike = () => {
         setLike(!like)
-        console.log(like)
+        onFavourite()
     }
 
 

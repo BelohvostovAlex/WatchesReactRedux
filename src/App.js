@@ -4,22 +4,27 @@ import { Card, Header, Drawer } from './components';
 import React from 'react';
 import axios from 'axios'
 
-
-
 function App() {
-  const [cardOpened, setCartOpened] = React.useState(false)
   const [watches, setWatches] = React.useState([])
+  const [cartItems, setCartItems] = React.useState([])
+  const [cardOpened, setCartOpened] = React.useState(false)
+
 
   React.useEffect(() => {
-    axios.get('http://localhost:3001/watches').then(({ data }) => {
-      console.log(data)
+    axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/watches').then(({data}) => {
+      console.log('rec')
       return setWatches(data)
     })
   }, [])
 
+  const onAddToCart = (obj) => {
+    setCartItems(prev => [...prev, obj])
+  }
+  console.log(cartItems)
+
   return (
     <div className="wrapper">
-      {cardOpened && <Drawer onClose={() => setCartOpened(false)}/>}
+      {cardOpened && <Drawer cartItems={cartItems} onClose={() => setCartOpened(false)}/>}
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content">
         <div className="contentTitleBlock">
@@ -31,7 +36,14 @@ function App() {
         </div>
         <div className="contentInner">
           {watches &&
-            watches.map((item,index) => <Card key={item.title + index} title={item.title} price={item.price} src={item.src}/>)}
+            watches.map(item => 
+            <Card 
+            key={item.id} 
+            title={item.title} 
+            price={item.price} 
+            src={item.src}
+            onAdd={(obj) => onAddToCart(obj)}
+            onFfavourite={1}/>)}
         </div>
       </div>
     </div>
