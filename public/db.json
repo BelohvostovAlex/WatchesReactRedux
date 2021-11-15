@@ -1,0 +1,13 @@
+{
+  "watches": [
+    { "id":0, "title": "Apple Watch series 7", "price": 1150, "src": "/img/watches/1.png" },
+    { "id":1, "title": "Apple Watch series 6", "price": 1100, "src": "/img/watches/2.png" },
+    { "id":2, "title": "Apple Watch series 6", "price": 1150, "src": "/img/watches/3.png" },
+    { "id":3, "title": "Apple Watch series 6", "price": 980, "src": "/img/watches/4.png" },
+    { "id":4, "title": "Apple Watch series SE", "price": 1075, "src": "/img/watches/5.png" },
+    { "id":5, "title": "Apple Watch series SE", "price": 890, "src": "/img/watches/6.png" },
+    { "id":6, "title": "Apple Watch series SE", "price": 950, "src": "/img/watches/7.png" },
+    { "id":7, "title": "Apple Watch series 3", "price": 1005, "src": "/img/watches/8.png" },
+    { "id":8, "title": "Apple Watch series 3", "price": 999, "src": "/img/watches/9.png" }
+  ]
+}
