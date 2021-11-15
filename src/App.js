@@ -11,10 +11,11 @@ function App() {
   const [watches, setWatches] = React.useState([])
 
   React.useEffect(() => {
-    axios.get('http://localhost:3000/db.json').then(({ data }) => {
-      return setWatches(data.watches)
-    },[])
-  })
+    axios.get('http://localhost:3001/watches').then(({ data }) => {
+      console.log(data)
+      return setWatches(data)
+    })
+  }, [])
 
   return (
     <div className="wrapper">
