@@ -14,6 +14,9 @@ function App() {
     axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/watches').then(({data}) => {
       return setWatches(data)
     })
+    axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/carts').then(({data}) => {
+      return setCartItems(data)
+    })
   }, [])
 
   const onAddToCart = (obj) => {
@@ -21,6 +24,11 @@ function App() {
     axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/carts', obj)
     .then(res => console.log(res))
     .catch(err => console.log(err))
+  }
+
+  const onRemoveFromCart = (id) => {
+    axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${id}`)
+    setCartItems((prev) => prev.filter(item => item.id !== id))
   }
   
   const onChangeSearchInput = (e) => {
@@ -30,7 +38,12 @@ function App() {
 
   return (
     <div className="wrapper">
-      {cardOpened && <Drawer cartItems={cartItems} onClose={() => setCartOpened(false)}/>}
+      {cardOpened && 
+        <Drawer 
+        cartItems={cartItems} 
+        onClose={() => setCartOpened(false)}
+        onRemove={onRemoveFromCart}
+        />}
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content">
         <div className="contentTitleBlock">

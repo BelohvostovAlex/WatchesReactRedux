@@ -122,3 +122,21 @@
       background: darken(bisque, 10%);
     }
   }
+
+  .cartEmpty {
+    text-align: center;
+
+    h2 {
+      display: inline;
+      margin-bottom: 20px;
+    }
+
+    img {
+      display: block;
+      margin: 20px auto;
+    }
+
+    .orderButton {
+      margin-top: 20px;
+    }
+  }
