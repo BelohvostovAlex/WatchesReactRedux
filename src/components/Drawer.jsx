@@ -14,15 +14,18 @@ function Drawer( {cartItems = [], onClose} ) {
           </h2>
 
           <div className="items">
-            {cartItems.map(item => {
-              return (<div className="cartItem">
+            {cartItems.map((item,i) => {
+              return (<div 
+              className="cartItem"
+              key={item.id}>
                 <img width={70} height={70} src={item.src} alt="Watch" />
                 <div className="cartItemInfo">
                   <div>
                     <p>{item.title}</p>
                     <b>{item.price} BYN</b>
                   </div>
-                  <button className="button button-remove">
+                  <button 
+                  className="button button-remove">
                     <img
                       className="removeImg"
                       width={20}

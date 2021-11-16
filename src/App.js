@@ -7,20 +7,26 @@ import axios from 'axios'
 function App() {
   const [watches, setWatches] = React.useState([])
   const [cartItems, setCartItems] = React.useState([])
+  const [searchValue, setSearchValue] = React.useState('')
   const [cardOpened, setCartOpened] = React.useState(false)
-
 
   React.useEffect(() => {
     axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/watches').then(({data}) => {
-      console.log('rec')
       return setWatches(data)
     })
   }, [])
 
   const onAddToCart = (obj) => {
     setCartItems(prev => [...prev, obj])
+    axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/carts', obj)
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
   }
-  console.log(cartItems)
+  
+  const onChangeSearchInput = (e) => {
+    setSearchValue(e.target.value)
+  }
+  console.log(searchValue)
 
   return (
     <div className="wrapper">
@@ -28,15 +34,20 @@ function App() {
       <Header onClickCart={() => setCartOpened(true)} />
       <div className="content">
         <div className="contentTitleBlock">
-          <h1 className="contentTitle">All watches</h1>
+          <h1 className="contentTitle">{searchValue ? `Searching for:${searchValue}` : 'All watches'}</h1>
           <div className="search-block">
             <img width={20} height={20} src="/img/search.png" alt="Search" />
-            <input type="text" placeholder="Search.." />
+            <input
+            onChange={onChangeSearchInput} 
+            type="text" 
+            placeholder="Search.." 
+            value={searchValue}
+            maxLength={12}/>
           </div>
         </div>
         <div className="contentInner">
           {watches &&
-            watches.map(item => 
+            watches.filter(watch => watch.title.toLowerCase().includes(searchValue.toLowerCase())).map(item => 
             <Card 
             key={item.id} 
             title={item.title} 
@@ -49,5 +60,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
