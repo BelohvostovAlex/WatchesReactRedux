@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 
-function Header( {onClickCart} ) {
+function Header( {onClickCart, sum} ) {
     return (
         <header>
             <Link to="/">
@@ -17,7 +17,7 @@ function Header( {onClickCart} ) {
             <ul className="headerRight">
                 <li onClick={onClickCart}>
                     <img width={20} height={20} src="/img/bag.png" alt="Cart" />
-                    <span>120 BYN</span>
+                    <span>{sum} BYN</span>
                 </li>
                 <li>
                    <Link to="/favourites">

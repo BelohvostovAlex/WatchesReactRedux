@@ -1,6 +1,6 @@
 import React from "react";
 
-function Drawer({ cartItems = [], onClose, onRemove }) {
+function Drawer({ cartItems = [], onClose, onRemove, sum }) {
   return (
     <div className="overlay">
       <div className="drawer">
@@ -47,7 +47,7 @@ function Drawer({ cartItems = [], onClose, onRemove }) {
                 <li>
                   <span>Total:</span>
                   <div></div>
-                  <b>{cartItems.reduce((acc, cur) => acc + cur.price, 0)} BYN</b>
+                  <b>{sum} BYN</b>
                 </li>
                 <li>
                   <span>Tax 5%:</span>
