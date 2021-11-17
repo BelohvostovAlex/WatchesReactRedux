@@ -16,10 +16,11 @@ function Drawer({ cartItems = [], onClose, onRemove }) {
         {cartItems.length > 0 ?
           <div>
             <div className="items">
-              {cartItems.map(item => {
+              {cartItems.map((item,index) => {
+
                 return (<div
                   className="cartItem"
-                  key={item.id}>
+                  key={index}>
                   <img width={70} height={70} src={item.src} alt="Watch" />
                   <div className="cartItemInfo">
                     <div>
@@ -61,6 +62,7 @@ function Drawer({ cartItems = [], onClose, onRemove }) {
           </div>
           :
           <div className="cartEmpty">
+            <div>
             <img width={120} height={120} src="/img/emptyBox.png" alt="" />
             <h2>Cart is empty</h2>
             <p>Please add a watch that u are want and deserve!</p>
@@ -69,6 +71,7 @@ function Drawer({ cartItems = [], onClose, onRemove }) {
               className="orderButton">
               Go back
             </button>
+            </div>
           </div>}
 
 

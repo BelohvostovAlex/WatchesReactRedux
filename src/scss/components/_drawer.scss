@@ -2,7 +2,7 @@
 @import '../button';
 
 .overlay {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     left: 0%;
@@ -72,6 +72,7 @@
       align-items: flex-end;
       margin-bottom: 20px;
     }
+    
     div {
       flex: 1;
       height: 1px;
@@ -125,6 +126,12 @@
 
   .cartEmpty {
     text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    justify-content: center;
+    
 
     h2 {
       display: inline;
