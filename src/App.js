@@ -43,7 +43,7 @@ function App() {
     try {
       if(cartItems.find(item => item.itemId === obj.itemId)) {
         console.log('true')
-        // axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${obj.itemId}`)
+        // axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${obj.id}`)
         setCartItems((prev) => prev.filter(item => item.itemId !== obj.itemId))
       } else {
         let response = await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/carts', obj)
@@ -85,10 +85,14 @@ function App() {
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
   };
+
+  const isItemAdded = (itemId) => {
+    return cartItems.some((obj) => +obj.itemId === +itemId)
+  }
   
 
   return (
-    <AppContext.Provider value={{ watches, cartItems ,likedItems}}>
+    <AppContext.Provider value={{ watches, cartItems ,likedItems, isItemAdded}}>
     <div className="wrapper">
       {cardOpened && (
         <Drawer

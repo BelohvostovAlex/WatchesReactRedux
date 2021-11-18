@@ -1,6 +1,14 @@
 import React from "react";
 
+import Info from "./Info";
+
 function Drawer({ cartItems = [], onClose, onRemove, sum }) {
+
+  const [isOrderDone, setOrderDone] = React.useState(false)
+  const onClickOrder = () => {
+    setOrderDone(true)
+  }
+
   return (
     <div className="overlay">
       <div className="drawer">
@@ -17,7 +25,6 @@ function Drawer({ cartItems = [], onClose, onRemove, sum }) {
           <>
             <div className="items">
               {cartItems.map((item,index) => {
-
                 return (<div
                   className="cartItem"
                   key={index}>
@@ -54,27 +61,21 @@ function Drawer({ cartItems = [], onClose, onRemove, sum }) {
                   <div></div>
                   <b>12.5 BYN</b>
                 </li>
-                <button className="orderButton">
-                  Order it <img width={20} height={20} src="/img/next.png" alt="Next" />
+                <button 
+                className="orderButton"
+                onClick={onClickOrder}>
+                  Order it 
+                  <img width={20} height={20} src="/img/next.png" alt="Next" />
                 </button>
               </ul>
             </div>
           </>
           :
-          <div className="cartEmpty">
-            <div>
-            <img width={120} height={120} src="/img/emptyBox.png" alt="" />
-            <h2>Cart is empty</h2>
-            <p>Please add a watch that u are want and deserve!</p>
-            <button
-              onClick={onClose}
-              className="orderButton">
-              Go back
-            </button>
-            </div>
-          </div>}
-
-
+          <Info 
+          title={'Cart is empty'}
+          description={'Please add a watch that u are want and deserve!'}
+          img={'/img/emptyBox.png'}
+          onClose={onClose}/>}
       </div>
     </div>
   );

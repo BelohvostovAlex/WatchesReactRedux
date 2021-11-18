@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ContentLoader from 'react-content-loader';
+import AppContext from '../context';
 
 function Card({
   id,
@@ -10,17 +11,15 @@ function Card({
   itemId,
   onAdd,
   onLike,
-  added = false,
   isLiked = false,
   isLoading = false,
 }) {
 
-    
-  const [check, setCheck] = React.useState(added);
+  const { isItemAdded } = React.useContext(AppContext)
   const [like, setLike] = React.useState(isLiked);
 
+
   const handleCheck = () => {
-    setCheck(!check);
     onAdd({ id, title, src, price, itemId });
   };
 
@@ -54,7 +53,7 @@ function Card({
               <img
                 width={11}
                 height={11}
-                src={check ? '/img/check.png' : '/img/plus.png'}
+                src={isItemAdded(itemId) ? '/img/check.png' : '/img/plus.png'}
                 alt="Add"
               />
             </button>

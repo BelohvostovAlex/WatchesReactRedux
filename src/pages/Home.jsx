@@ -5,13 +5,13 @@ import { Card } from '../components'
 
 function Home({ 
     watches,
-    cartItems,
     searchValue,
     onChangeSearchInput,
     onAddToCart,
     onLikeItems,
-    isLoading
+    isLoading,
 }) {
+
     
     return (
         <div className="content">
@@ -40,7 +40,6 @@ function Home({
                   onAdd={(obj) => onAddToCart(obj)}
                   onLike={(obj) => onLikeItems(obj)}
                   {...item}
-                  added={cartItems.some(cartItem => cartItem.itemId === item.itemId) ? true : false}
                   isLoading={isLoading}
                 />
               ))
