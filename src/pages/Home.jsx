@@ -5,10 +5,12 @@ import { Card } from '../components'
 
 function Home({ 
     watches,
+    cartItems,
     searchValue,
     onChangeSearchInput,
     onAddToCart,
-    onLikeItems
+    onLikeItems,
+    isLoading
 }) {
     
     return (
@@ -29,7 +31,7 @@ function Home({
           </div>
         </div>
         <div className="contentInner">
-          {watches &&
+          {!isLoading && watches ?
             watches
               .filter((watch) => watch.title.toLowerCase().includes(searchValue.toLowerCase()))
               .map((item,index) => (
@@ -38,8 +40,15 @@ function Home({
                   onAdd={(obj) => onAddToCart(obj)}
                   onLike={(obj) => onLikeItems(obj)}
                   {...item}
+                  added={cartItems.some(cartItem => cartItem.itemId === item.itemId) ? true : false}
+                  isLoading={isLoading}
                 />
-              ))}
+              ))
+            :
+            Array(9).fill('1').map((item,index) => <Card
+              isLoading={isLoading}
+              key={index}
+            />)}
         </div>
       </div>
     )

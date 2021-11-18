@@ -1,8 +1,11 @@
 import React from 'react';
 
 import { Card } from '../components';
+import AppContext from '../context';
 
-function Favourites({ likedItems, onLikeItems }) {
+function Favourites({ onLikeItems }) {
+  const { likedItems } = React.useContext(AppContext)
+
   return (
     <div className="content">
       <div className="contentTitleBlock">

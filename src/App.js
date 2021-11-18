@@ -1,12 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import axios from 'axios';
 
 import './scss/index.scss';
 
+import AppContext from './context';
+
 import { Header, Drawer } from './components';
 import Home from './pages/Home';
-import axios from 'axios';
 import Favourites from './pages/Favourites';
+
 
 function App() {
   const [watches, setWatches] = React.useState([]);
@@ -14,25 +17,43 @@ function App() {
   const [likedItems, setLikedItems] = React.useState([]);
   const [searchValue, setSearchValue] = React.useState('');
   const [cardOpened, setCartOpened] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true)
   const [sum, setSum] = React.useState(0)
 
   React.useEffect(() => {
-    axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/watches').then(({ data }) => {
-      return setWatches(data);
-    });
-    axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/carts').then(({ data }) => {
-      return setCartItems(data);
-    });
-    axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/liked').then(({ data }) => {
-      return setLikedItems(data);
-    });
+    async function fetchData() {
+      setIsLoading(true)
+      const watchesResponse = await axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/watches')
+      const cartItemsResponse = await axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/carts')
+      const likedItemsResponse = await axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/liked')
+      
+      setIsLoading(false)
+
+      setCartItems(cartItemsResponse.data)
+      setLikedItems(likedItemsResponse.data)
+      setWatches(watchesResponse.data)
+      
+    }
+
+    fetchData()
   }, []);
 
   const onAddToCart = async (obj) => {
-    let response = await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/carts', obj)
-console.log(response)
-      setCartItems((prev) => [...prev, response.data]);
-      onCartSum()
+    console.log(obj)
+    try {
+      if(cartItems.find(item => item.itemId === obj.itemId)) {
+        console.log('true')
+        // axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${obj.itemId}`)
+        setCartItems((prev) => prev.filter(item => item.itemId !== obj.itemId))
+      } else {
+        let response = await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/carts', obj)
+        console.log(response)
+        setCartItems((prev) => [...prev, response.data]);
+        onCartSum()
+      }
+    } catch (error) {
+      alert('Whoops, didnt add the item to card...')
+    }
   };
 
   const onLikeItems = async (obj) => {
@@ -64,8 +85,10 @@ console.log(response)
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
   };
+  
 
   return (
+    <AppContext.Provider value={{ watches, cartItems ,likedItems}}>
     <div className="wrapper">
       {cardOpened && (
         <Drawer
@@ -84,23 +107,25 @@ console.log(response)
           element={
             <Home
               watches={watches}
+              cartItems={cartItems}
               searchValue={searchValue}
               onChangeSearchInput={onChangeSearchInput}
               onAddToCart={onAddToCart}
               onLikeItems={onLikeItems}
+              isLoading={isLoading}
             />
           }></Route>
         <Route 
           path="/favourites" 
           element={
             <Favourites 
-              likedItems={likedItems} 
               onLikeItems={onLikeItems}
               />} 
           exact>
         </Route>
       </Routes>
     </div>
+    </ AppContext.Provider>
   );
 }
 

@@ -14,7 +14,7 @@ function Drawer({ cartItems = [], onClose, onRemove, sum }) {
         </h2>
 
         {cartItems.length > 0 ?
-          <div>
+          <>
             <div className="items">
               {cartItems.map((item,index) => {
 
@@ -59,7 +59,7 @@ function Drawer({ cartItems = [], onClose, onRemove, sum }) {
                 </button>
               </ul>
             </div>
-          </div>
+          </>
           :
           <div className="cartEmpty">
             <div>
