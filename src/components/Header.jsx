@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from 'react-router-dom'
 
-function Header( {onClickCart, sum} ) {
+import { useCart } from '../hooks/useCart'
+
+function Header( {onClickCart} ) {
+    const { totalPrice } = useCart()
+    
     return (
         <header>
             <Link to="/">
@@ -17,7 +21,7 @@ function Header( {onClickCart, sum} ) {
             <ul className="headerRight">
                 <li onClick={onClickCart}>
                     <img width={20} height={20} src="/img/bag.png" alt="Cart" />
-                    <span>{sum} BYN</span>
+                    <span>{totalPrice} BYN</span>
                 </li>
                 <li>
                    <Link to="/favourites">

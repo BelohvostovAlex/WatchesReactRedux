@@ -18,7 +18,7 @@ function App() {
   const [searchValue, setSearchValue] = React.useState('');
   const [cardOpened, setCartOpened] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true)
-  const [sum, setSum] = React.useState(0)
+
 
   React.useEffect(() => {
     async function fetchData() {
@@ -37,19 +37,19 @@ function App() {
 
     fetchData()
   }, []);
+  console.log(cartItems)
+
 
   const onAddToCart = async (obj) => {
-    console.log(obj)
     try {
       if(cartItems.find(item => item.itemId === obj.itemId)) {
         console.log('true')
-        // axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${obj.id}`)
+        axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${obj.id}`)
         setCartItems((prev) => prev.filter(item => item.itemId !== obj.itemId))
       } else {
         let response = await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/carts', obj)
         console.log(response)
         setCartItems((prev) => [...prev, response.data]);
-        onCartSum()
       }
     } catch (error) {
       alert('Whoops, didnt add the item to card...')
@@ -75,12 +75,9 @@ function App() {
   const onRemoveFromCart = (id) => {
     axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${id}`)
      setCartItems((prev) => prev.filter((item) => item.id !== id))
-     onCartSum()
+    //  onCartSum()
   };
 
-  const onCartSum = () => {
-    setSum(cartItems.reduce((acc,item) => acc + item.price,0))
-  }
 
   const onChangeSearchInput = (e) => {
     setSearchValue(e.target.value);
@@ -92,26 +89,23 @@ function App() {
   
 
   return (
-    <AppContext.Provider value={{ watches, cartItems ,likedItems, isItemAdded}}>
+    <AppContext.Provider value={{ watches, cartItems, setCartItems, likedItems, isItemAdded}}>
     <div className="wrapper">
       {cardOpened && (
         <Drawer
           cartItems={cartItems}
           onClose={() => setCartOpened(false)}
           onRemove={onRemoveFromCart}
-          sum={sum}
         />
       )}
       <Header 
-      onClickCart={() => setCartOpened(true)} 
-      sum={sum}/>
+      onClickCart={() => setCartOpened(true)} />
       <Routes>
         <Route
           path="/"
           element={
             <Home
               watches={watches}
-              cartItems={cartItems}
               searchValue={searchValue}
               onChangeSearchInput={onChangeSearchInput}
               onAddToCart={onAddToCart}

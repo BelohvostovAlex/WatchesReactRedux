@@ -122,6 +122,22 @@
     &:active {
       background: darken(bisque, 10%);
     }
+    &:disabled {
+      background-color: darken($biege, 20%);
+      animation: disabled .8s infinite ease-in-out;
+    }
+
+    @keyframes disabled {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: .8;
+      }
+      100% {
+        opacity: .4;
+      }
+    }
   }
 
   .cartEmpty {

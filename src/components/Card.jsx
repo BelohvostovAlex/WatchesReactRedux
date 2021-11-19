@@ -6,6 +6,7 @@ import AppContext from '../context';
 function Card({
   id,
   title,
+  descr,
   price,
   src,
   itemId,
@@ -21,6 +22,7 @@ function Card({
 
   const handleCheck = () => {
     onAdd({ id, title, src, price, itemId });
+    console.log(id)
   };
 
   const handleLike = () => {
@@ -43,17 +45,18 @@ function Card({
             </button>
           </div>
           <h5>{title}</h5>
+          <p>{descr}</p>
 
           <div className="cardBottom">
             <div className="cardPrice">
               <span>Price:</span>
               <b>{price} BYN</b>
             </div>
-            <button className="button" onClick={handleCheck}>
+            <button className="button" onClick={handleCheck} >
               <img
                 width={11}
                 height={11}
-                src={isItemAdded(itemId) ? '/img/check.png' : '/img/plus.png'}
+                src={isItemAdded(id) ? '/img/check.png' : '/img/plus.png'}
                 alt="Add"
               />
             </button>
