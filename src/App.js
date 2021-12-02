@@ -9,6 +9,7 @@ import AppContext from './context';
 import { Header, Drawer } from './components';
 import Home from './pages/Home';
 import Favourites from './pages/Favourites';
+import Orders from './pages/Orders';
 
 
 function App() {
@@ -22,34 +23,36 @@ function App() {
 
   React.useEffect(() => {
     async function fetchData() {
-      setIsLoading(true)
-      const watchesResponse = await axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/watches')
-      const cartItemsResponse = await axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/carts')
-      const likedItemsResponse = await axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/liked')
-      
-      setIsLoading(false)
-
-      setCartItems(cartItemsResponse.data)
-      setLikedItems(likedItemsResponse.data)
-      setWatches(watchesResponse.data)
-      
+      try {
+        setIsLoading(true)
+        const [watchesResponse, cartItemsResponse, likedItemsResponse ] = await Promise.all([
+          axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/watches'),
+          axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/carts'),
+          axios.get('https://6192739c57b14a0017c4a0c6.mockapi.io/liked')
+      ])
+        setIsLoading(false)
+  
+        setCartItems(cartItemsResponse.data)
+        setLikedItems(likedItemsResponse.data)
+        setWatches(watchesResponse.data)
+      } catch (error) {
+        alert('Smthng went wrong with fetching data :(')
+      }
     }
 
     fetchData()
   }, []);
-  console.log(cartItems)
 
 
   const onAddToCart = async (obj) => {
     try {
-      if(cartItems.find(item => item.itemId === obj.itemId)) {
-        console.log('true')
-        axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${obj.id}`)
+      const findItem = cartItems.find(item => item.itemId === obj.itemId)
+      if (findItem) {
         setCartItems((prev) => prev.filter(item => item.itemId !== obj.itemId))
+        await axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${findItem.id}`)
       } else {
         let response = await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/carts', obj)
-        console.log(response)
-        setCartItems((prev) => [...prev, response.data]);
+        setCartItems((prev) => [...prev, response.data])
       }
     } catch (error) {
       alert('Whoops, didnt add the item to card...')
@@ -59,8 +62,8 @@ function App() {
   const onLikeItems = async (obj) => {
    try {
       if(likedItems.find(item => {
-        return item.id === obj.id})) {
-      setLikedItems((prev) => prev.filter((item) => item.id !== obj.id));
+        return item.itemId === obj.itemId})) {
+      setLikedItems((prev) => prev.filter((item) => item.itemId !== obj.itemId));
       axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/liked/${obj.id}`);
     } else {
       const { data } =  await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/liked', obj);
@@ -68,14 +71,19 @@ function App() {
     }
    } catch (error) {
      alert('Cant add it to favourite list')
+     console.error(error)
    }
   };
 
 
   const onRemoveFromCart = (id) => {
-    axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${id}`)
-     setCartItems((prev) => prev.filter((item) => item.id !== id))
-    //  onCartSum()
+    try {
+      setCartItems((prev) => prev.filter((item) => item.id !== id))
+      axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${id}`)
+    } catch(err) {
+      alert('Smthng went wrong with removing item from the cart')
+      console.error(err)
+    }
   };
 
 
@@ -91,14 +99,13 @@ function App() {
   return (
     <AppContext.Provider value={{ watches, cartItems, setCartItems, likedItems, isItemAdded}}>
     <div className="wrapper">
-      {cardOpened && (
         <Drawer
           cartItems={cartItems}
           onClose={() => setCartOpened(false)}
           onRemove={onRemoveFromCart}
+          opened={cardOpened}
         />
-      )}
-      <Header 
+       <Header 
       onClickCart={() => setCartOpened(true)} />
       <Routes>
         <Route
@@ -120,6 +127,10 @@ function App() {
               onLikeItems={onLikeItems}
               />} 
           exact>
+        </Route>
+        <Route
+          path="/orders"
+          element={<Orders />}>
         </Route>
       </Routes>
     </div>

@@ -29,7 +29,9 @@ function Header( {onClickCart} ) {
                    </Link>
                 </li>
                 <li>
+                   <Link to="/orders">
                     <img width={20} height={20} src="/img/user.png" alt="User" />
+                    </Link>
                 </li>
             </ul>
         </header>

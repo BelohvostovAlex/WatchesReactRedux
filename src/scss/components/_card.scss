@@ -5,7 +5,7 @@
     border: 1px solid $biege;
     padding: 20px;
     width: 23%;
-    margin-bottom: 20px;
+    margin: 1%;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -53,5 +53,27 @@
   
     b {
       font-size: 18px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .card {
+      width: 31%;
+    }
+  }
+
+  @media screen and (max-width: 665px) {
+    .card {
+      width: 48%;
+    }
+  }
+
+  @media screen and (max-width: 530px) {
+    .card {
+      width: 80%;
+      margin: 10px auto;
+      h5,p {
+        text-align: center;
+      }
     }
   }

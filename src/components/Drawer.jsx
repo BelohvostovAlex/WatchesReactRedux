@@ -6,7 +6,7 @@ import Info from "./Info";
 import {useCart} from '../hooks/useCart'
 
 
-function Drawer({ cartItems = [], onClose, onRemove }) {
+function Drawer({ cartItems = [], onClose, onRemove, opened }) {
   const { setCartItems, totalPrice } = useCart()
   const [isOrderDone, setOrderDone] = React.useState(false)
   const [orderId, setOrderId] = React.useState(null)
@@ -21,7 +21,7 @@ function Drawer({ cartItems = [], onClose, onRemove }) {
   const onClickOrder = async () => {
     try {
       setIsLoading(true)
-      let response = await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/order', cartItems)
+      let response = await axios.post('https://6192739c57b14a0017c4a0c6.mockapi.io/order', {items: cartItems})
       for(let i = 0; i < cartItems.length; i++) {
         let item = cartItems[i]
         await delay(100, axios.delete(`https://6192739c57b14a0017c4a0c6.mockapi.io/carts/${item.id}`))
@@ -38,7 +38,7 @@ function Drawer({ cartItems = [], onClose, onRemove }) {
   
 
   return (
-    <div className="overlay">
+    <div className={`overlay ${opened ? 'overlayVisible' : ''} `}>
       <div className="drawer">
         <h2>
           Cart

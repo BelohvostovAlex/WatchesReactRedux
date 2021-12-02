@@ -62,7 +62,6 @@ button {
 
   .contentInner {
     display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
   }
 
@@ -90,6 +89,19 @@ button {
         outline: none;
       }
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .contentTitleBlock {
+    flex-direction: column;
+    align-items: flex-start !important;
   }
 }
 

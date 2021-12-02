@@ -14,20 +14,20 @@ function Card({
   onLike,
   isLiked = false,
   isLoading = false,
+  isOrder,
 }) {
 
   const { isItemAdded } = React.useContext(AppContext)
   const [like, setLike] = React.useState(isLiked);
-
+  const obj = { id, title, src, price, itemId }
 
   const handleCheck = () => {
-    onAdd({ id, title, src, price, itemId });
-    console.log(id)
+    onAdd(obj);
   };
 
   const handleLike = () => {
     setLike(!like);
-    onLike({ id, title, src, price });
+    onLike(obj);
   };
 
   return (
@@ -36,13 +36,17 @@ function Card({
         <>
           <div className="cardTop">
             <img width={160} height={160} src={src} alt="Watches" />
-            <button className="button button-favor" onClick={handleLike}>
+          {onLike && 
+          <button 
+            className="button button-favor" 
+            onClick={handleLike}
+            disabled={isOrder}>
               {!like ? (
                 <img width={11} height={11} src="/img/heart.png" alt="Favourite" />
               ) : (
                 <img width={11} height={11} src="/img/heartliked.png" alt="Liked" />
               )}
-            </button>
+            </button>}
           </div>
           <h5>{title}</h5>
           <p>{descr}</p>
@@ -52,11 +56,14 @@ function Card({
               <span>Price:</span>
               <b>{price} BYN</b>
             </div>
-            <button className="button" onClick={handleCheck} >
+            <button 
+            className="button" 
+            onClick={handleCheck} 
+            disabled={isOrder}>
               <img
                 width={11}
                 height={11}
-                src={isItemAdded(id) ? '/img/check.png' : '/img/plus.png'}
+                src={isItemAdded(id) || isOrder ? '/img/check.png' : '/img/plus.png'}
                 alt="Add"
               />
             </button>
