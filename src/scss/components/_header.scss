@@ -47,3 +47,17 @@ header {
       }
     }
   }
+
+  @media screen and (max-width: 425px) {
+    .headerInfo {
+      display: none;
+    }
+    .headerRight {
+      li:nth-child(1) {
+        margin-right: 10px;
+      }
+      li:nth-child(2) {
+        margin-right: 10px;
+      }
+    }
+  }
