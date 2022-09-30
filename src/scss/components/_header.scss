@@ -1,49 +1,49 @@
-@import '../variables';
-@import '../button'; 
+@import "../variables";
+@import "../button";
 
 header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  border-bottom: 1px solid $biege;
+
+  .headerLeft {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 40px;
-    border-bottom: 1px solid $biege;
-  
-    .headerLeft {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      
-      h3 {
-        text-transform: uppercase;
-      }
-  
-      img {
-        margin-right: 15px;
-      }
-      
-      p {
-        opacity: .7;
-      }
+    cursor: pointer;
+
+    h3 {
+      text-transform: uppercase;
     }
-  
-    .headerRight {
-      display: flex;
-      align-items: center;
-      
-      li {
-        cursor: pointer;
-      }
-  
-      li:nth-child(1) {
-        display: flex;
-        align-items: center;
-        margin-right: 25px;
-        img {
-          margin-right: 5px;
-        }
-      }
-      li:nth-child(2) {
-        margin-right: 25px;
-      }
+
+    img {
+      margin-right: 15px;
+    }
+
+    p {
+      opacity: 0.7;
     }
   }
+
+  .headerRight {
+    display: flex;
+    align-items: center;
+
+    li {
+      cursor: pointer;
+    }
+
+    li:nth-child(1) {
+      display: flex;
+      align-items: center;
+      margin-right: 25px;
+      img {
+        margin-right: 5px;
+      }
+    }
+    li:nth-child(2) {
+      margin-right: 25px;
+    }
+  }
+}

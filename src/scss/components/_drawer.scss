@@ -1,92 +1,92 @@
-@import '../variables';
-@import '../button';
+@import "../variables";
+@import "../button";
 
 .overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0%;
-    bottom: 0%;
-    background-color: rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(4px);
-    z-index: 1;
-    visibility: hidden;
-    opacity: 0;
-    transition:  opacity 0.3s ease-in-out, visibility 0.1s ease-in-out;
-  }
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0%;
+  bottom: 0%;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+  z-index: 1;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out, visibility 0.1s ease-in-out;
+}
 
-  .overlayVisible {
-    visibility: visible;
-    opacity: 1;
+.overlayVisible {
+  visibility: visible;
+  opacity: 1;
 
-    .drawer {
-      transform: translateX(0%);
-    }
-  }
-  
   .drawer {
-    position: absolute;
-    height: 100%;
-    width: 30%;
-    top: 0%;
-    right: 0%;
-    background-color: #fff;
-    box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    transform: translateX(0%);
+  }
+}
+
+.drawer {
+  position: absolute;
+  height: 100%;
+  width: 30%;
+  top: 0%;
+  right: 0%;
+  background-color: #fff;
+  box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.2s ease-in-out;
+
+  h2 {
+    margin-bottom: 30px;
     display: flex;
-    flex-direction: column;
-    transform: translateX(100%);
-    transition: transform 0.2s ease-in-out;
-  
-    h2 {
-      margin-bottom: 30px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .items {
+    flex: 1;
+    overflow: auto;
+    margin-bottom: 40px;
+  }
+
+  .cartItem {
+    display: flex;
+    align-items: center;
+    border: 1px solid $biege;
+    border-radius: 20px;
+    padding: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    &:hover {
+      border: 1px solid bisque;
+    }
+
+    .cartItemInfo {
+      width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-    }
-  
-    .items {
-      flex: 1;
-      overflow: auto;
-      margin-bottom: 40px;
-    }
-  
-    .cartItem {
-      display: flex;
-      align-items: center;
-      border: 1px solid $biege;
-      border-radius: 20px;
-      padding: 10px;
-      overflow: hidden;
-      margin-bottom: 20px;
-  
-      &:hover {
-        border: 1px solid bisque;
-      }
-  
-      .cartItemInfo {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-left: 20px;
-  
-        p {
-          font-size: 14px;
-          margin-bottom: 2px;
-        }
+      margin-left: 20px;
+
+      p {
+        font-size: 14px;
+        margin-bottom: 2px;
       }
     }
   }
-  
-  .drawerBottom {
-   ul {
+}
+
+.drawerBottom {
+  ul {
     li {
       display: flex;
       align-items: flex-end;
       margin-bottom: 20px;
     }
-    
+
     div {
       flex: 1;
       height: 1px;
@@ -95,85 +95,83 @@
       top: -3px;
       margin: 0 7px;
     }
-   }
-   .orderButton {
-     position: relative;
-  
-     &:hover {
-       img {
+  }
+  .orderButton {
+    position: relative;
+
+    &:hover {
+      img {
         top: 50%;
         right: 8%;
-        transform: translate(-8%,-50%);
-       }
-     }
-  
-     img {
-      position: absolute;
-      top: 50%;
-      right: 10%;
-      transform: translate(-10%,-50%);
-      transition: all .2s ease-in-out;
-    }
-   }
-  
-  }
-  
-  .orderButton {
-    width: 100%;
-    height: 55px;
-    background: $biege;
-    border-radius: 18px;
-    border: #fff;
-    font-size: 16px;
-    font-weight: 500;
-    transition: all .2s ease-in-out;
-    color: #000;
-  
-    &:hover {
-      background: bisque;
-    }
-  
-    &:active {
-      background: darken(bisque, 10%);
-    }
-    &:disabled {
-      background-color: darken($biege, 20%);
-      animation: disabled .8s infinite ease-in-out;
-    }
-
-    @keyframes disabled {
-      0% {
-        opacity: 1;
+        transform: translate(-8%, -50%);
       }
-      50% {
-        opacity: .8;
-      }
-      100% {
-        opacity: .4;
-      }
-    }
-  }
-
-  .cartEmpty {
-    text-align: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    justify-content: center;
-    
-
-    h2 {
-      display: inline;
-      margin-bottom: 20px;
     }
 
     img {
-      display: block;
-      margin: 20px auto;
-    }
-
-    .orderButton {
-      margin-top: 20px;
+      position: absolute;
+      top: 50%;
+      right: 10%;
+      transform: translate(-10%, -50%);
+      transition: all 0.2s ease-in-out;
     }
   }
+}
+
+.orderButton {
+  width: 100%;
+  height: 55px;
+  background: $biege;
+  border-radius: 18px;
+  border: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  color: #000;
+
+  &:hover {
+    background: bisque;
+  }
+
+  &:active {
+    background: darken(bisque, 10%);
+  }
+  &:disabled {
+    background-color: darken($biege, 20%);
+    animation: disabled 0.8s infinite ease-in-out;
+  }
+
+  @keyframes disabled {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.4;
+    }
+  }
+}
+
+.cartEmpty {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+
+  h2 {
+    display: inline;
+    margin-bottom: 20px;
+  }
+
+  img {
+    display: block;
+    margin: 20px auto;
+  }
+
+  .orderButton {
+    margin-top: 20px;
+  }
+}

@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
-import { Card } from '../components';
-import AppContext from '../context';
+import { Card } from "../components";
+import AppContext from "../context";
 
 function Favourites({ onLikeItems }) {
-  const { likedItems } = React.useContext(AppContext)
+  const { likedItems } = React.useContext(AppContext);
 
   return (
     <div className="content">
@@ -14,7 +14,7 @@ function Favourites({ onLikeItems }) {
       <div className="contentInner">
         {likedItems &&
           likedItems.map((item) => (
-            <Card key={item.id} isLiked={true} onLike={onLikeItems} {...item}/>
+            <Card key={item.id} isLiked={true} onLike={onLikeItems} {...item} />
           ))}
       </div>
     </div>

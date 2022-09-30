@@ -1,79 +1,80 @@
-@import '../variables.scss';
-@import '../button';
+@import "../variables.scss";
+@import "../button";
 
 .card {
-    border: 1px solid $biege;
-    padding: 20px;
-    width: 23%;
-    margin: 1%;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid $biege;
-    transition: all 0.2s ease-in-out;
-  
-    &:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
-  
-    .cardTop {
-      position: relative;
-      display: flex;
-      justify-content: center;
-    }
-  
-    .cardBottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-  
-      .cardPrice {
-        display: flex;
-        flex-direction: column;
-        margin: 20px 0px;
-      }
-    }
-  
-    h5 {
-      margin-top: 20px;
-      margin-bottom: 5px;
-    }
+  border: 1px solid $biege;
+  padding: 20px;
+  width: 23%;
+  margin: 1%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid $biege;
+  transition: all 0.2s ease-in-out;
 
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .cardTop {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .cardBottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .cardPrice {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0px;
+    }
+  }
+
+  h5 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 12px;
+  }
+
+  span {
+    font-size: 12px;
+    opacity: 0.5;
+  }
+
+  b {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 31%;
+  }
+}
+
+@media screen and (max-width: 665px) {
+  .card {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 530px) {
+  .card {
+    width: 80%;
+    margin: 10px auto;
+    h5,
     p {
-      font-size: 12px;
-    }
-  
-    span {
-      font-size: 12px;
-      opacity: .5;
-    }
-  
-    b {
-      font-size: 18px;
+      text-align: center;
     }
   }
-
-  @media screen and (max-width: 768px) {
-    .card {
-      width: 31%;
-    }
-  }
-
-  @media screen and (max-width: 665px) {
-    .card {
-      width: 48%;
-    }
-  }
-
-  @media screen and (max-width: 530px) {
-    .card {
-      width: 80%;
-      margin: 10px auto;
-      h5,p {
-        text-align: center;
-      }
-    }
-  }
+}

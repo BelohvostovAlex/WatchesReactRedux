@@ -1,27 +1,32 @@
-@import './variables';
-@import './button';
-@import './components/card';
-@import './components/header';
-@import './components/drawer';
+@import "./variables";
+@import "./button";
+@import "./components/card";
+@import "./components/header";
+@import "./components/drawer";
 
 body {
   margin: 0;
   color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: $biege; 
-  background: -webkit-linear-gradient(to left, #FFFFFF, #ECE9E6); 
-  background: linear-gradient(to left, #FFFFFF, #ECE9E6); 
+  background: $biege;
+  background: -webkit-linear-gradient(to left, #ffffff, #ece9e6);
+  background: linear-gradient(to left, #ffffff, #ece9e6);
 }
 
 * {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   box-sizing: border-box;
   padding: 0%;
   margin: 0%;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
 
@@ -31,12 +36,11 @@ a {
 }
 
 p {
-  margin: 0
+  margin: 0;
 }
 
 ul {
   list-style-type: none;
-  
 }
 
 button {
@@ -71,7 +75,7 @@ button {
     align-items: center;
     margin-bottom: 40px;
   }
-  
+
   .search-block {
     display: flex;
     align-items: center;
@@ -84,7 +88,7 @@ button {
       border: 0;
       padding: 10px;
       width: 200px;
-      
+
       &:focus {
         outline: none;
       }
@@ -104,11 +108,3 @@ button {
     align-items: flex-start !important;
   }
 }
-
-
-
-
-
-
-
-
